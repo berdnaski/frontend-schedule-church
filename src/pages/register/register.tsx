@@ -2,7 +2,7 @@
 import { Container } from "@/components/container/container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRegister } from "@/hooks/useRegister";  
+import { useRegister } from "@/lib/hooks/useRegister";  
 import { useEffect, useState } from "react";
 import { toast } from 'sonner'; 
 import { FaUser, FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
