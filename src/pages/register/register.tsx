@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
+import { toast } from 'sonner'; 
 import { FaUser, FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 
 export function Register() {
@@ -14,7 +15,12 @@ export function Register() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await register({ name, email, password });
+        try {
+            await register({ name, email, password });
+            toast.success('Cadastro realizado com sucesso!'); 
+        } catch {
+            toast.error('Ocorreu um erro ao realizar o cadastro.'); 
+        }
     };
 
     return (
