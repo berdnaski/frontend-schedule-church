@@ -1,12 +1,13 @@
-import api from '../api/axios';
+// src/services/authService.ts
+import api from "@/api/axios";
+import { RegisterUser } from "@/@types/auth";
 
-export const registerUser = async (name: string, email: string, password: string) => {
-    try {
-        const res = await api.post('/register', { name, email, password });
-
-        return res.data;
-    } catch (error) {
-        console.error('Error during registration:', error);
-        throw new Error('Ocorreu um erro ao tentar registrar!');
-    }
-}
+export const registerUser = async (userData: RegisterUser): Promise<void> => {
+  try {
+    const res = await api.post('/register', userData);
+    return res.data;
+  } catch {
+    console.error('Error during registration:');
+    throw new Error('Ocorreu um erro ao tentar registrar!');
+  }
+};

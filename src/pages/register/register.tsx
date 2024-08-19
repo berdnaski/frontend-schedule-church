@@ -7,14 +7,14 @@ import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 
 export function Register() {
-    const { register } = useAuth();
+    const { register, isLoading, error } = useAuth();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await register(name, email, password);
+        await register({ name, email, password });
     };
 
     return (
@@ -52,8 +52,12 @@ export function Register() {
                     <div className="flex flex-col items-center justify-center h-32 w-full mt-4">
                         <Button 
                             type="submit" 
-                            className="flex w-full bg-[#E6E6E6] text-black hover:bg-zinc-300">Registrar
+                            className="flex w-full bg-[#E6E6E6] text-black hover:bg-zinc-300"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? 'Cadastrando...' : 'Registrar'}
                         </Button>
+                        {error && <p className="text-red-500">{error}</p>}
                         <span className="text-white font-semibold my-2">OU</span>
                         <Button type="button" className="bg-black w-full" icon={<FaGoogle />}>Entrar com Google</Button>
                     </div>

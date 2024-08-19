@@ -1,26 +1,18 @@
-// src/context/AuthContext.tsx
 import { createContext, useContext, ReactNode } from 'react';
-import { registerUser } from '../services/authService';
+import { useRegister } from '../hooks/useRegister';
 import { AuthContextType } from '@/@types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const register = async (name: string, email: string, password: string) => {
-    try {
-      await registerUser(name, email, password);
-      console.log('User registered successfully!');
-    } catch {
-      console.error('Failed to register user');
-    }
-  };
+  const { register, isLoading, error } = useRegister();
 
   return (
-    <AuthContext.Provider value={{ register }}>
+    <AuthContext.Provider value={{ register, isLoading, error }}>
       {children}
     </AuthContext.Provider>
   );
