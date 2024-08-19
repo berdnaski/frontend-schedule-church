@@ -1,15 +1,27 @@
-export interface UserProps {
-    uid: string;
-    name: string | null;
-    email: string | null;
-  }
-  
-  export interface RegisterUser {
-    name: string;
-    email: string;
-    password: string;
-  }
+import { Dispatch, SetStateAction } from 'react';
 
-  export interface AuthContextType {
-    register: (userData: RegisterUser) => void;
-  }
+export interface UserProps {
+  uid: string;
+  name: string;
+  email: string;
+  role: 'ADMIN' | 'MEMBER' | 'LEADER';
+}
+
+export interface RegisterUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginUser {
+  email: string;
+  password: string;
+}
+
+export interface AuthContextType {
+  register: (userData: RegisterUser) => Promise<void>;
+  login: (userData: LoginUser) => Promise<void>;
+  user: UserProps | null; 
+  setUser: Dispatch<SetStateAction<UserProps | null>>;
+  isAdmin: () => boolean; // Função que verifica se o usuário é admin
+}
