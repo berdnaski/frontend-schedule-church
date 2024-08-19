@@ -12,6 +12,4 @@ export interface UserProps {
 
   export interface AuthContextType {
     register: (userData: RegisterUser) => void;
-    isLoading: boolean;
-    error: string | null;
   }

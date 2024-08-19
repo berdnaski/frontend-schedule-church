@@ -2,24 +2,27 @@
 import { Container } from "@/components/container/container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/context/AuthContext";
+import { useRegister } from "@/hooks/useRegister";  
 import { useState } from "react";
 import { toast } from 'sonner'; 
 import { FaUser, FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 
 export function Register() {
-    const { register, isLoading, error } = useAuth();
+    const { register, error } = useRegister();  
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             await register({ name, email, password });
-            toast.success('Cadastro realizado com sucesso!'); 
+            toast.success('Cadastro realizado com sucesso!');
         } catch {
-            toast.error('Ocorreu um erro ao realizar o cadastro.'); 
+            toast.error('Ocorreu um erro ao realizar o cadastro.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -61,7 +64,7 @@ export function Register() {
                             className="flex w-full bg-[#E6E6E6] text-black hover:bg-zinc-300"
                             disabled={isLoading}
                         >
-                            {isLoading ? 'Cadastrando...' : 'Registrar'}
+                            Registrar
                         </Button>
                         {error && <p className="text-red-500">{error}</p>}
                         <span className="text-white font-semibold my-2">OU</span>

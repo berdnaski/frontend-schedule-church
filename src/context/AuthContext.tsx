@@ -1,3 +1,4 @@
+// src/context/AuthContext.tsx
 import { createContext, useContext, ReactNode } from 'react';
 import { useRegister } from '../hooks/useRegister';
 import { AuthContextType } from '@/@types/auth';
@@ -9,10 +10,10 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const { register, isLoading, error } = useRegister();
+  const { register, error } = useRegister(); 
 
   return (
-    <AuthContext.Provider value={{ register, isLoading, error }}>
+    <AuthContext.Provider value={{ register, error }}>
       {children}
     </AuthContext.Provider>
   );
