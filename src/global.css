@@ -7,6 +7,20 @@ body {
   background: linear-gradient(#131313, #141414);
 }
 
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #080808;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #161718;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

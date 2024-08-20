@@ -1,5 +1,4 @@
 import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
-import { useNavigate } from "react-router-dom";
 
 type AuthComponentProps = {
   role?: string;
@@ -13,8 +12,6 @@ export const AuthComponent = ({
   role,
 }: AuthComponentProps) => {
   const { getInfoToken } = useLoginService();
-  const navigate = useNavigate();
-
   const user = getInfoToken();
 
   if (!user) {
@@ -23,7 +20,7 @@ export const AuthComponent = ({
 
   if (role && user.role !== role) {
     if (redirect) {
-      navigate(redirect);
+      window.location.href = redirect;
     }
 
     return null;

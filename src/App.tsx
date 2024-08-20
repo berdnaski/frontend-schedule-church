@@ -5,31 +5,37 @@ import { Dashboard } from "./pages/dashboard/dashboard";
 import { Login } from "./pages/login/login";
 import { Register } from "./pages/register/register";
 import { Private } from "./routes/Private";
+import { Layout } from "./components/layout/layout";
 
 const router = createBrowserRouter([
   {
-    path: "/register",
-    element: <Register />
-  },
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <Private>
-        <Dashboard />
-      </Private>
-    )
-  },
-  {
-    path: "/admin",
-    element: (
-      <Private role='ADMIN'>
-        <Admin />
-      </Private>
-    )
+    element: <Layout />,
+    children: [
+      {
+        path: "/register",
+        element: <Register />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <Private>
+            <Dashboard />
+          </Private>
+        )
+      },
+      {
+        path: "/admin",
+        element: (
+          <Private role='ADMIN'>
+            <Admin />
+          </Private>
+        )
+      }
+    ]
   }
 ]);
 
