@@ -5,10 +5,12 @@ import { GoOrganization } from "react-icons/go";
 import { IoMdMenu } from "react-icons/io";
 import { FaClipboardList, FaRegSun, FaRightFromBracket } from "react-icons/fa6";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null); 
+    const { logout } = useLoginService();
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -103,6 +105,7 @@ export function Header() {
 
                         <div className="flex mx-2 mb-4">
                             <button 
+                                onClick={logout}
                                 className="w-full flex text-red-400 items-center gap-4 md:text-center text-start hover:bg-[#3b3b3b] cursor-pointer border-[#292828]"
                             ><FaRightFromBracket />
                                 Sair
