@@ -7,7 +7,6 @@ body {
   background: linear-gradient(#131313, #141414);
 }
 
-/* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 12px;
 }

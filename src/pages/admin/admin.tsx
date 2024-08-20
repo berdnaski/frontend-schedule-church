@@ -21,7 +21,7 @@ const users = [
 export function Admin() {
   return (
     <AuthComponent role="ADMIN" redirect="/dashboard">
-      <div className="min-h-screen bg-[#121212] text-white flex-col lg:flex-row">
+      <div className=" bg-[#121212] text-white flex-col lg:flex-row">
         <main className="flex-1 p-6 lg:p-8 ml-0 lg:pl-6 overflow-y-auto">
           <div id="manage-users" className="bg-[#161718] rounded-xl shadow-md mb-8 md:w-[75%] md:mx-auto">
             <div className="max-h-[60vh] overflow-x-auto rounded-xl scrollbar-hide">
