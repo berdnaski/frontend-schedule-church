@@ -1,7 +1,11 @@
+import { AuthComponent } from "@/components/ui/auth-component";
+
 export function Admin() {
-    return(
-        <div>
-            <h1>Admin</h1>
-        </div>
-    )
+  return (
+    <AuthComponent role="ADMIN" redirect="/dashboard">
+      <div>
+        <h1>Admin</h1>
+      </div>
+    </AuthComponent>
+  );
 }

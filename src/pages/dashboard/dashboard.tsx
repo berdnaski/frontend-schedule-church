@@ -1,7 +1,9 @@
 export function Dashboard() {
-    return (
-        <div>
-            <a href="/admin">Admddin</a>
-        </div>
-    )
+  return (
+    <div>
+      <a className="text-white" href="/admin">
+        Admddin
+      </a>
+    </div>
+  );
 }

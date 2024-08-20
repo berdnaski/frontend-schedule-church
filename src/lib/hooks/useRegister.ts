@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { RegisterUser } from '@/@types/auth';
-import { registerUser } from '@/services/authService';
+import { useState } from "react";
+import { RegisterUser } from "@/@types/auth";
+import { registerUser } from "@/controllers/authService";
 
 export function useRegister() {
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +14,7 @@ export function useRegister() {
       if (error instanceof Error) {
         setError(error.message);
       }
-      throw new Error('Registration failed.');
+      throw new Error("Registration failed.");
     }
   };
 
