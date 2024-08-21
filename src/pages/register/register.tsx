@@ -29,6 +29,7 @@ export function Register() {
         try {
             await register({ name, email, password });
             toast.success('Cadastro realizado com sucesso!');
+            navigate('/login');
         } catch {
             toast.error('Ocorreu um erro ao realizar o cadastro.');
         } finally {

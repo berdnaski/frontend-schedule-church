@@ -5,12 +5,15 @@ import { GoOrganization } from "react-icons/go";
 import { IoMdMenu } from "react-icons/io";
 import { FaClipboardList, FaRegSun, FaRightFromBracket } from "react-icons/fa6";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
 import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null); 
     const { logout } = useLoginService();
+    const navigate = useNavigate();
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -97,6 +100,12 @@ export function Header() {
                                     className="flex items-center gap-4 list-none w-full md:text-center p-2 hover:bg-[#3b3b3b] cursor-pointer border-[#292828]"
                                 >   <FaClipboardList />
                                     Repertório
+                                </li>
+                                <li 
+                                    onClick={() => navigate('/admin')}
+                                    className="flex items-center gap-4 list-none w-full md:text-center p-2 hover:bg-[#3b3b3b] cursor-pointer border-[#292828]"
+                                >   <RiAdminFill />
+                                    Área Administrativa
                                 </li>
                             </ul>
                         </div>

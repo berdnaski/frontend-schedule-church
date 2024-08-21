@@ -6,9 +6,11 @@ export function Layout() {
     const shouldShowHeader = !['/login', '/register'].includes(location.pathname);
 
     return (
-        <>
+        <div className="flex flex-col min-h-screen">
             {shouldShowHeader && <Header />}
-            <Outlet />
-        </>
+            <main className="flex-grow flex items-center justify-center">
+                <Outlet />
+            </main>
+        </div>
     );
 }

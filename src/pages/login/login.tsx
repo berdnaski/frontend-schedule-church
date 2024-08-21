@@ -18,7 +18,6 @@ export function Login() {
       console.log("Attempting to log in with", { email, password });
       await execute({ email, password });
       toast.success("Login realizado com sucesso!");
-      alert("Login successful. Redirecionando para /dashboard");
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
