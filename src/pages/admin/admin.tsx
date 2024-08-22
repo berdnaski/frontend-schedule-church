@@ -1,24 +1,26 @@
+import { UserProps } from "@/@types/auth";
+import { api } from "@/api/axios";
 import { AuthComponent } from "@/components/ui/auth-component";
+import { useEffect, useState } from "react";
 import { FaRegPenToSquare, FaRegRectangleXmark  } from "react-icons/fa6"
 import { Link } from "react-router-dom";
 
-// Exemplo de uma lista de usuários
-const users = [
-  { id: 1, name: "John Doe", role: "Admin" },
-  { id: 2, name: "Jane Smith", role: "Leader" },
-  { id: 3, name: "Alice Johnson", role: "Member" },
-  { id: 1, name: "John Doe", role: "Admin" },
-  { id: 2, name: "Jane Smith", role: "Leader" },
-  { id: 3, name: "Alice Johnson", role: "Member" },
-  { id: 1, name: "John Doe", role: "Admin" },
-  { id: 2, name: "Jane Smith", role: "Leader" },
-  { id: 3, name: "Alice Johnson", role: "Member" },
-  { id: 1, name: "John Doe", role: "Admin" },
-  { id: 2, name: "Jane Smith", role: "Leader" },
-  { id: 3, name: "Alice Johnson", role: "Member" },
-];
-
 export function Admin() {
+  const [users, setUsers] = useState<UserProps[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await api.get<{ users: UserProps[] }>("/users");
+        setUsers(res.data.users);
+      } catch (err) {
+        console.error("Failed to fetch users:", err);
+      }
+    }
+
+    fetchUsers();
+  }, [])
+
   return (
     <AuthComponent role="ADMIN" redirect="/dashboard">
       <div className="bg-[#121212] text-white flex-col lg:flex-row">
@@ -35,10 +37,10 @@ export function Admin() {
                 </thead>
                 <tbody className="bg-[#161718] divide-y divide-[#000000] rounded-xl">
                   {users.map((user) => (
-                    <tr key={user.id}>
+                    <tr key={user.uid}>
                       <td className="p-4 text-sm text-white">
                         <div className="flex items-center">
-                          <Link to={`/users/${user.id}`} className="text-gray-300 hover:text-gray-400">
+                          <Link to={`/users/${user.uid}`} className="text-gray-300 hover:text-gray-400">
                             {user.name}
                           </Link>
                         </div>
@@ -47,13 +49,13 @@ export function Admin() {
                       <td className="p-4 flex space-x-2">
                         <Link
                           className="hover:text-gray-400"
-                          to={`/users/edit/${user.id}`}
+                          to={`/users/edit/${user.uid}`}
                         >
                           <FaRegPenToSquare size={20} />
                         </Link>
                         <button
                           className="hover:text-red-500"
-                          onClick={() => alert(`Delete user with id: ${user.id}`)}
+                          onClick={() => alert(`Delete user with id: ${user.uid}`)}
                         >
                           <FaRegRectangleXmark size={20} />
                         </button>

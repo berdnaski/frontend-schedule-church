@@ -25,3 +25,13 @@ export interface AuthContextType {
   setUser: Dispatch<SetStateAction<UserProps | null>>;
   isAdmin: () => boolean; // Função que verifica se o usuário é admin
 }
+
+export interface CreateLeaderRequestDTO {
+  userId: string;
+  status: "PENDING";
+}
+
+export interface LeaderRequestResponse {
+  message: string;
+}
+
