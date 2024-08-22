@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -14,23 +15,38 @@ export function RequestLeaderModal({
 }) {
   const { execute, isLoading, isError, error } = useCreateLeaderRequest();
 
+  const [showMessage, setShowMessage] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       console.log("Enviando solicitação de liderança...");
       await execute({ userId, status: "PENDING" });
-      onClose();
+      setShowMessage(true);
+      handleClose();
     } catch {
+      setShowMessage(true); // Exibe a mensagem de erro
       console.error("Erro ao solicitar liderança:", error);
     }
   };
 
+  const handleClose = () => {
+    onClose();
+    setShowMessage(false); 
+  };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setShowMessage(false); 
+    }
+  }, [isOpen]);
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
         className="fixed inset-0 h-screen w-full bg-[#121212] p-6 flex flex-col justify-center items-center z-50"
       >
-        <button onClick={onClose} className="absolute top-4 left-4">
+        <button onClick={handleClose} className="absolute top-4 left-4">
           <FaArrowLeftLong size={30} color="white" />
         </button>
 
@@ -44,7 +60,7 @@ export function RequestLeaderModal({
                 Você está prestes a solicitar para se tornar um líder. Um administrador precisará aprovar essa solicitação.
               </DialogDescription>
             </div>
-            {isError && (
+            {isError && showMessage && (
               <p className="text-red-500 mb-4">
                 {"Falha ao enviar a solicitação. Tente novamente."}
               </p>
