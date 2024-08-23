@@ -25,7 +25,7 @@ export function RequestLeaderModal({
       setShowMessage(true);
       handleClose();
     } catch {
-      setShowMessage(true); // Exibe a mensagem de erro
+      setShowMessage(true); 
       console.error("Erro ao solicitar liderança:", error);
     }
   };
