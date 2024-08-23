@@ -35,3 +35,8 @@ export interface LeaderRequestResponse {
   message: string;
 }
 
+export interface LeaderRequest {
+  id: string;
+  userId: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+}

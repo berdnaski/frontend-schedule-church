@@ -35,6 +35,7 @@ export const useLoginService = () => {
 
   const logout = () => {
     removeStorageItem(AUTH_TOKEN);
+    removeStorageItem(QK_USER);
     navigate("/login");
   };
 

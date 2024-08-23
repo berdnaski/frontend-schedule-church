@@ -7,7 +7,8 @@ import {
 } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useCreateLeaderRequest } from "@/lib/hooks/create-leader-request/create-leader-request";
+import { toast } from "sonner";
+import { useCreateLeaderRequest } from "@/lib/hooks/leader-request/create-leader-request";
 
 type RequestLeaderModalProps = {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function RequestLeaderModal({
     try {
       console.log("userId", userId);
       await execute({ userId, status: "PENDING" });
+      toast.success("Solicitação enviada com sucesso!");
       setShowMessage(true);
       handleClose();
     } catch {
