@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useCreateLeaderRequest } from "@/lib/hooks/create-leader-request/create-leader-request";
+
+type RequestLeaderModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  userId: string;
+};
 
 export function RequestLeaderModal({
   isOpen,
   onClose,
   userId,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  userId: string;
-}) {
+}: Readonly<RequestLeaderModalProps>) {
   const { execute, isLoading, isError, error } = useCreateLeaderRequest();
 
   const [showMessage, setShowMessage] = useState(false);
@@ -20,7 +27,7 @@ export function RequestLeaderModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log("Enviando solicitação de liderança...");
+      console.log("userId", userId);
       await execute({ userId, status: "PENDING" });
       setShowMessage(true);
       handleClose();
@@ -32,20 +39,18 @@ export function RequestLeaderModal({
 
   const handleClose = () => {
     onClose();
-    setShowMessage(false); 
+    setShowMessage(false);
   };
 
   useEffect(() => {
     if (!isOpen) {
-      setShowMessage(false); 
+      setShowMessage(false);
     }
   }, [isOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent
-        className="fixed inset-0 h-screen w-full bg-[#121212] p-6 flex flex-col justify-center items-center z-50"
-      >
+      <DialogContent className="fixed inset-0 h-screen w-full bg-[#121212] p-6 flex flex-col justify-center items-center z-50">
         <button onClick={handleClose} className="absolute top-4 left-4">
           <FaArrowLeftLong size={30} color="white" />
         </button>
@@ -57,7 +62,8 @@ export function RequestLeaderModal({
                 Solicitar para se tornar Líder
               </DialogTitle>
               <DialogDescription className="text-sm text-zinc-400 mb-4">
-                Você está prestes a solicitar para se tornar um líder. Um administrador precisará aprovar essa solicitação.
+                Você está prestes a solicitar para se tornar um líder. Um
+                administrador precisará aprovar essa solicitação.
               </DialogDescription>
             </div>
             {isError && showMessage && (
@@ -65,7 +71,10 @@ export function RequestLeaderModal({
                 {"Falha ao enviar a solicitação. Tente novamente."}
               </p>
             )}
-            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full flex flex-col items-center"
+            >
               <div className="flex space-x-2 w-full items-center justify-center">
                 <Button
                   type="submit"
