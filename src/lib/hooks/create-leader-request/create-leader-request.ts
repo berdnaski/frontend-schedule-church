@@ -1,5 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { createLeaderRequest, CreateLeaderRequestDTO } from "@/controllers/leader/create-leader-request";
+import {
+  createLeaderRequest,
+  CreateLeaderRequestDTO,
+} from "@/controllers/leader/create-leader-request";
 import { LeaderRequestResponse } from "@/@types/auth";
 
 export const useCreateLeaderRequest = () => {
@@ -9,8 +12,7 @@ export const useCreateLeaderRequest = () => {
       console.error("Erro ao criar solicitação de liderança:", error);
     },
     onSuccess: async (data: LeaderRequestResponse) => {
-        console.log("Solicitação de liderança criada com sucesso:", data);
-  
+      console.log("Solicitação de liderança criada com sucesso:", data);
     },
   });
 

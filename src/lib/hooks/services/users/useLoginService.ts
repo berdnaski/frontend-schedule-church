@@ -33,8 +33,6 @@ export const useLoginService = () => {
     setStorageItem(QK_USER, user);
   };
 
-  // NOTE: A partir daqui são coisas a mais, normalmente apenas o mutation e execute são criados
-
   const logout = () => {
     removeStorageItem(AUTH_TOKEN);
     navigate("/login");
