@@ -1,9 +1,13 @@
-import { getUserInfo, UserInfoResponse } from "@/controllers/users/getUserInfo";
+import {
+  getUserInfo,
+  GetUserInfoResponse,
+} from "@/controllers/users/getUserInfo";
 import { login, LoginResponse } from "@/controllers/users/login";
 import { AUTH_TOKEN, QK_USER } from "@/lib/constants/query-constants";
 import { useStorage } from "@/lib/hooks/useStorage";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export const useLoginService = () => {
   const { getStorageItem, setStorageItem, removeStorageItem } = useStorage();
@@ -12,11 +16,13 @@ export const useLoginService = () => {
   const loginMutation = useMutation({
     mutationFn: login,
     onError: (error) => {
-      // TODO: Se todos os erros da api tiverem a mesma estrutura, podemos tratar aqui
-      console.error(error);
+      toast.error(error.message);
     },
     onSuccess: async (data: LoginResponse) => {
       setStorageItem(AUTH_TOKEN, data.token);
+      const user = await getUserInfo();
+      console.log("User", user);
+      setStorageItem(QK_USER, user);
       navigate("/admin");
     },
   });
@@ -29,8 +35,6 @@ export const useLoginService = () => {
     password: string;
   }) => {
     await loginMutation.mutateAsync({ email, password });
-    const user = await getUserInfo();
-    setStorageItem(QK_USER, user);
   };
 
   const logout = () => {
@@ -39,7 +43,7 @@ export const useLoginService = () => {
     navigate("/login");
   };
 
-  const getInfoToken = (): UserInfoResponse | null => {
+  const getInfoToken = (): GetUserInfoResponse | null => {
     const userStr = getStorageItem(QK_USER);
 
     if (!userStr) {
