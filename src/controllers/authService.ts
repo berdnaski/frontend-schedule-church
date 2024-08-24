@@ -15,7 +15,7 @@ export const loginUser = async (userData: LoginUser): Promise<string> => {
     const res = await api.post("/login", userData);
     if (res.data && res.data.token) {
       localStorage.setItem("token", res.data.token);
-      return res.data.token; // Retorna o token
+      return res.data.token;
     } else {
       throw new Error("Login failed! No token received.");
     }
@@ -34,7 +34,7 @@ export async function fetchUser(token: string): Promise<UserProps> {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("User fetched:", res.data); // Adicione um console.log aqui
+    console.log("User fetched:", res.data); 
     return res.data;
   } catch (error) {
     console.error("Error fetching user:", error);
