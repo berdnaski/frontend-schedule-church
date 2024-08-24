@@ -1,13 +1,13 @@
 import { Container } from "@/components/container/container";
 import { RequestLeaderModal } from "@/components/leader-request/leader-request";
 import { Card } from "@/components/ui/card";
-import { UserInfoResponse } from "@/controllers/users/getUserInfo";
+import { GetUserInfoResponse } from "@/controllers/users/getUserInfo";
 import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
 import { useEffect, useState } from "react";
 
 export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState<UserInfoResponse | null>(null);
+  const [user, setUser] = useState<GetUserInfoResponse | null>(null);
   const { getInfoToken } = useLoginService();
 
   const handleOpenModal = () => setIsModalOpen(true);

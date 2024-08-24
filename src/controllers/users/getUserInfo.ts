@@ -1,7 +1,7 @@
 import { api } from "@/api/axios";
 import { z } from "zod";
 
-const userInfoSchema = z.object({
+const getUserInfoSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string(),
@@ -11,10 +11,10 @@ const userInfoSchema = z.object({
   departments: z.array(z.string()),
 });
 
-export type UserInfoResponse = z.infer<typeof userInfoSchema>;
+export type GetUserInfoResponse = z.infer<typeof getUserInfoSchema>;
 
-export const getUserInfo = async (): Promise<UserInfoResponse> => {
+export const getUserInfo = async (): Promise<GetUserInfoResponse> => {
   const url = "/user";
   const response = await api.get(url);
-  return userInfoSchema.parse(response.data);
+  return getUserInfoSchema.parse(response.data["user"]);
 };

@@ -8,7 +8,7 @@ import {
 import { Button } from "../ui/button";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { toast } from "sonner";
-import { useCreateLeaderRequest } from "@/lib/hooks/leader-request/create-leader-request";
+import { useCreateLeaderRequest } from "@/lib/hooks/services/leader-request/create-leader-request";
 
 type RequestLeaderModalProps = {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export function RequestLeaderModal({
       setShowMessage(true);
       handleClose();
     } catch {
-      setShowMessage(true); 
+      setShowMessage(true);
       console.error("Erro ao solicitar liderança:", error);
     }
   };
