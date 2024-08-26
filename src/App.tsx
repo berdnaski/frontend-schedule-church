@@ -6,6 +6,7 @@ import { Login } from "./pages/login/login";
 import { Register } from "./pages/register/register";
 import { Private } from "./routes/Private";
 import { Layout } from "./components/layout/layout";
+import { ListSchedules } from "./pages/schedules/list-schedules";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
         element: (
           <Private role='ADMIN'>
             <Admin />
+          </Private>
+        )
+      },
+      {
+        path: "/schedules",
+        element: (
+          <Private>
+            <ListSchedules />
           </Private>
         )
       }

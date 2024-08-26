@@ -1,65 +1,59 @@
 import { Container } from "@/components/container/container";
-import { RequestLeaderModal } from "@/components/leader-request/leader-request";
-import { Card } from "@/components/ui/card";
-import { GetUserInfoResponse } from "@/controllers/users/getUserInfo";
-import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import logoImg from "../../assets/eu.jpeg";
+import { useNavigate } from "react-router-dom";
+import { CardSchedule } from "@/components/card-schedule/card-schedule";
+import { CardBirthDay } from "@/components/card-birthday/card-birthday";
 
 export function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState<GetUserInfoResponse | null>(null);
-  const { getInfoToken } = useLoginService();
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const user = await getInfoToken();
-      setUser(user);
-    };
-
-    fetch();
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <>
       <Container>
-        <div className="flex flex-col items-center justify-center flex-grow px-4 py-8">
-          <h1 className="text-2xl mb-8 text-center text-white font-semibold">
-            O que você gostaria de fazer?
-          </h1>
+        <div className="flex flex-col w-full mt-6">
+          <div className="flex w-full justify-between items-center">
+            <div className="flex flex-col justify-between">
+              <div className="flex flex-col">
+                <h1 className="text-left text-zinc-200 text-xl">Ministérios</h1>
+                <span className="text-left text-zinc-500 font-thin">Louvor</span>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center h-full">
+              <Button className="bg-transparent font-semibold hover:bg-transparent">Visualizar</Button>
+            </div>
+          </div>
 
-          <div className="flex flex-col gap-6">
-            <Card className="w-full mx-auto p-6 bg-[#242323] hover:bg-[#1a1919] cursor-pointer text-white">
-              <h2 className="text-xl font-semibold mb-4">Sou membro</h2>
-              <span>
-                Entrar em um departamento da igreja e me tornar participante.
-              </span>
-            </Card>
+          <div className="flex mt-2">
+            <img src={logoImg} alt="Logo" className="flex justify-start items-start mt-2 w-36 h-32 rounded-3xl object-cover" />
+          </div>
 
-            <Card
-              onClick={handleOpenModal}
-              className="w-full mx-auto p-6 bg-[#242323] hover:bg-[#1a1919] cursor-pointer text-white"
-            >
-              <h2 className="text-xl font-semibold mb-4">Sou líder</h2>
-              <span>Lidere e organize escalas dos seus departamentos.</span>
-            </Card>
+          <div className="flex w-full justify-between items-center mt-2">
+            <div className="flex flex-col justify-between">
+              <div className="flex flex-col">
+                <h1 className="text-left text-zinc-200 text-xl">Minhas escalas</h1>
+                <span className="text-left text-zinc-500 font-thin">Próximas</span>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center h-full">
+              <Button 
+                onClick={() => navigate('/schedules')}
+                className="bg-transparent font-semibold hover:bg-transparent"
+              >
+                Ver todas
+              </Button>
+            </div>
+          </div>
 
-            <Card className="w-full mx-auto p-6 bg-[#242323] hover:bg-[#1a1919] cursor-pointer text-white">
-              <h2 className="text-xl font-semibold mb-4">Visitante</h2>
-              <span>Quero apenas conhecer um pouco mais da igreja.</span>
-            </Card>
+          <div className="bg-[#161718] rounded-md mt-4">
+            <CardSchedule />
+          </div>
+
+          <div>
+            <CardBirthDay />  
           </div>
         </div>
       </Container>
-      {user && (
-        <RequestLeaderModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          userId={user.id}
-        />
-      )}
     </>
   );
 }

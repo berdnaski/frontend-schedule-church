@@ -8,6 +8,8 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
 import { useNavigate } from "react-router-dom";
+import { CiCirclePlus } from 'react-icons/ci';
+import { Button } from "../ui/button";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,15 +29,20 @@ export function Header() {
     }, []);
 
     return (
-        <header className="flex justify-between items-center text-black py-6 px-8 bg-[#161718] drop-shadow-md relative">
+        <header className="flex justify-between items-center text-black py-4 px-4 bg-[#161718] drop-shadow-md relative">
             <IoMdMenu 
                 size={30} 
                 color="white" 
                 className="xl:hidden block text-5xl cursor-pointer" 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
-            <img src={Eu} className="w-12 hover:scale-105 transition-all rounded-full" alt="Logo" />
+            <div className="flex items-center justify-center gap-2">
+            <Button className="bg-transparent hover:bg-transparent text-red-700">
+                <CiCirclePlus size={40} />
+            </Button>
+            <img src={Eu} className="w-10 hover:scale-105 transition-all rounded-xl" alt="Logo" />
 
+            </div>
             <ul className="hidden xl:flex items-center gap-4 font-semibold text-base">
                 <a className="p-3 hover:bg-[#3b3b3b] text-white cursor-pointer hover:text-zinc-200 rounded-md transition-all">Perfil</a>
                 <a className="p-3 hover:bg-[#3b3b3b] text-white cursor-pointer hover:text-zinc-200 rounded-md transition-all">Escalas</a>
