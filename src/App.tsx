@@ -7,6 +7,7 @@ import { Register } from "./pages/register/register";
 import { Private } from "./routes/Private";
 import { Layout } from "./components/layout/layout";
 import { ListSchedules } from "./pages/schedules/list-schedules";
+import { CreateSchedules } from "./pages/schedules/create-schedules";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
         element: (
           <Private>
             <ListSchedules />
+          </Private>
+        )
+      },
+      {
+        path: "/schedules/create",
+        element: (
+          <Private>
+            <CreateSchedules />
           </Private>
         )
       }
