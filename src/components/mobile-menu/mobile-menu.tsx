@@ -4,7 +4,7 @@ import { RiAdminFill } from "react-icons/ri";
 import { FaRightFromBracket } from "react-icons/fa6";
 import Eu from "../../assets/eu.jpeg";
 import Logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginService } from "@/lib/hooks/services/users/useLoginService";
 
 interface MobileMenuProps {
@@ -48,10 +48,12 @@ export function MobileMenu({ menuRef, isMenuOpen, closeMenu }: MobileMenuProps) 
 
                     <div className="flex flex-col flex-grow mt-6">
                         <ul className="flex flex-col flex-grow">
+                        <Link to="/departments">
                             <li className="list-none flex items-center gap-4 w-full md:text-center p-2 hover:bg-[#3b3b3b] cursor-pointer">
                                 <GoOrganization />
                                 Departamentos
                             </li>
+                        </Link>
                             <li className="list-none flex items-center gap-4 w-full md:text-center p-2 hover:bg-[#3b3b3b] cursor-pointer">
                                 <FaRegCalendarAlt />
                                 Indisponibilidades

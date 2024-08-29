@@ -8,6 +8,7 @@ import { Private } from "./routes/Private";
 import { Layout } from "./components/layout/layout";
 import { ListSchedules } from "./pages/schedules/list-schedules";
 import { CreateSchedules } from "./pages/schedules/create-schedules";
+import { CreateDepartmentForm } from "./pages/department/create-department";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
         element: (
           <Private>
             <CreateSchedules />
+          </Private>
+        )
+      },
+      {
+        path: "/departments",
+        element: (
+          <Private>
+            <CreateDepartmentForm />
           </Private>
         )
       }

@@ -100,3 +100,48 @@ export default tseslint.config({
           </div>
           )}
 ```
+        <div>
+          <div className="max-w-4xl mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4 text-zinc-200 antialiased">Criar Departamento</h1>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className='flex flex-col gap-2'>
+                    <label htmlFor="name" className="block text-sm font-medium text-zinc-200">
+                    Nome
+                    </label>
+                    <Input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className='border border-gray-700'
+                    placeholder="Digite o nome do departamento"
+                    required
+                    />
+                </div>
+                <div className='flex flex-col gap-2'>
+                    <label htmlFor="description" className="block text-sm font-medium text-zinc-200">
+                    Descrição
+                    </label>
+                    <Input
+                    id="description"
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className='border border-gray-700'
+                    placeholder="Digite uma descrição"
+                    required
+                    />
+                </div>
+
+                <Button 
+                    type="submit" 
+                    className="w-full bg-blue-300 text-zinc-900 font-semibold hover:bg-blue-400"
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Criando...' : 'Criar Departamento'}
+                </Button>
+                {isError && <p className="text-red-500 mt-2">Erro: {error?.message}</p>}
+                {isSuccess && <p className="text-green-500 mt-2">Departamento criado com sucesso!</p>}
+            </form>
+          </div>
+        </div>
